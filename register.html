@@ -248,40 +248,46 @@
 
 </div>
 
+```html
 <!-- Supabase -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>
+<script src="./supabase.js"></script>
 
 <script>
-
   const form = document.getElementById("registerForm");
   const button = document.getElementById("registerButton");
   const message = document.getElementById("message");
 
   function showMessage(text, type) {
     message.textContent = text;
-    message.className = "message " + type;
+    message.className = type ? "message " + type : "message";
+  }
+
+  // Проверяем, загрузился ли supabase.js
+  if (typeof supabaseClient === "undefined") {
+    showMessage(
+      "Ошибка загрузки Supabase. Проверьте файл supabase.js.",
+      "error"
+    );
+    button.disabled = true;
   }
 
   form.addEventListener("submit", async function(event) {
-
     event.preventDefault();
 
-    const username =
-      document.getElementById("username").value.trim();
+    if (typeof supabaseClient === "undefined") {
+      showMessage(
+        "Supabase не загрузился. Проверьте файл supabase.js.",
+        "error"
+      );
+      return;
+    }
 
-    const displayName =
-      document.getElementById("displayName").value.trim();
-
-    const email =
-      document.getElementById("email").value.trim();
-
-    const password =
-      document.getElementById("password").value;
-
-    const password2 =
-      document.getElementById("password2").value;
+    const username = document.getElementById("username").value.trim();
+    const displayName = document.getElementById("displayName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const password2 = document.getElementById("password2").value;
 
     if (password !== password2) {
       showMessage("Пароли не совпадают.", "error");
@@ -298,39 +304,29 @@
 
     button.disabled = true;
     button.textContent = "Регистрация...";
-
     showMessage("", "");
 
     try {
-
       const { data, error } =
         await supabaseClient.auth.signUp({
-
           email: email,
-
           password: password,
-
           options: {
             data: {
               username: username,
               display_name: displayName
             }
           }
-
         });
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
       if (!data.user) {
-        throw new Error(
-          "Не удалось создать пользователя."
-        );
+        throw new Error("Не удалось создать пользователя.");
       }
 
       showMessage(
-        "Аккаунт успешно создан! Проверьте почту, если Supabase запросил подтверждение email.",
+        "Аккаунт успешно создан! Проверьте почту, если требуется подтверждение email.",
         "success"
       );
 
@@ -341,14 +337,11 @@
       }, 1800);
 
     } catch (error) {
-
       console.error(error);
 
       let text = error.message || "Произошла ошибка.";
 
-      if (
-        text.toLowerCase().includes("already registered")
-      ) {
+      if (text.toLowerCase().includes("already registered")) {
         text = "Этот email уже зарегистрирован.";
       }
 
@@ -357,9 +350,7 @@
       button.disabled = false;
       button.textContent = "Зарегистрироваться";
     }
-
   });
-
 </script>
 
 </body>
