@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оформление заказа — Blueprint Studio</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 1000px;
+      min-height: 70px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .back {
+      color: #4b5563;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 45px auto;
+      padding: 0 20px;
+    }
+
+    .title {
+      margin-bottom: 25px;
+    }
+
+    .title h1 {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .title p {
+      color: #6b7280;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 15px;
+      background: white;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, .1);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .method {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .method label {
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 15px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .method input {
+      width: auto;
+      margin-right: 8px;
+    }
+
+    .file-box {
+      border: 2px dashed #d1d5db;
+      border-radius: 14px;
+      padding: 25px;
+      text-align: center;
+      color: #6b7280;
+    }
+
+    .file-box input {
+      border: none;
+      padding: 10px 0 0;
+    }
+
+    .summary {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 20px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 7px 0;
+      color: #4b5563;
+    }
+
+    .summary-row.total {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 10px;
+      padding-top: 15px;
+      color: #111827;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .submit {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      background: #2563eb;
+      color: white;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .submit:hover {
+      background: #1d4ed8;
+    }
+
+    .notice {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 13px;
+      padding: 30px 20px;
+    }
+
+    @media (max-width: 600px) {
+      .method {
+        grid-template-columns: 1fr;
+      }
+
+      .title h1 {
+        font-size: 30px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="index.html">Blueprint Studio</a>
+    <a class="back" href="index.html">← На главную</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <div class="title">
+    <h1>Оформление заказа</h1>
+    <p>Заполни информацию о своём заказе.</p>
+  </div>
+
+  <div class="notice">
+    🔐 Для оформления заказа потребуется войти в аккаунт.
+  </div>
+
+  <form id="orderForm">
+
+```
+<div class="card">
+  <h2>📦 Информация о заказе</h2>
+
+  <div class="form-group">
+    <label for="product">Что вы хотите заказать?</label>
+
+    <select id="product" required>
+      <option value="">Выберите товар</option>
+      <option value="3d-print">3D-печать</option>
+      <option value="keychain">Брелок</option>
+      <option value="bracelet">Браслет</option>
+      <option value="other">Другое</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="quantity">Количество</label>
+
+    <input
+      id="quantity"
+      type="number"
+      min="1"
+      value="1"
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="format">Формат / размер</label>
+
+    <input
+      id="format"
+      type="text"
+      placeholder="Например: 50 мм, STL, стандартный"
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="comment">Комментарий</label>
+
+    <textarea
+      id="comment"
+      placeholder="Опишите дополнительные пожелания..."
+    ></textarea>
+  </div>
+</div>
+
+<div class="card">
+  <h2>🚚 Получение заказа</h2>
+
+  <div class="method">
+
+    <label>
+      <input
+        type="radio"
+        name="pickup"
+        value="office"
+        checked
+      >
+      Забрать самостоятельно
+    </label>
+
+    <label>
+      <input
+        type="radio"
+        name="pickup"
+        value="delivery"
+      >
+      Доставка
+    </label>
+
+  </div>
+</div>
+
+<div class="card">
+  <h2>📁 Файлы</h2>
+
+  <div class="file-box">
+    <div>Загрузите файл для заказа</div>
+
+    <input
+      id="files"
+      type="file"
+      multiple
+    >
+  </div>
+</div>
+
+<div class="card">
+  <h2>🎟️ Промокод</h2>
+
+  <div class="form-group">
+    <label for="promo">Промокод</label>
+
+    <input
+      id="promo"
+      type="text"
+      placeholder="Введите промокод"
+    >
+  </div>
+</div>
+
+<div class="card">
+
+  <h2>🧾 Итог</h2>
+
+  <div class="summary">
+
+    <div class="summary-row">
+      <span>Товар</span>
+      <strong id="summaryProduct">—</strong>
+    </div>
+
+    <div class="summary-row">
+      <span>Количество</span>
+      <strong id="summaryQuantity">1</strong>
+    </div>
+
+    <div class="summary-row total">
+      <span>Стоимость</span>
+      <strong id="summaryPrice">По расчёту</strong>
+    </div>
+
+  </div>
+
+  <br>
+
+  <button class="submit" type="submit">
+    Создать заказ
+  </button>
+
+</div>
+```
+
+  </form>
+
+</main>
+
+<footer>
+  © 2026 Blueprint Studio
+</footer>
+
+<script>
+  const product = document.getElementById("product");
+  const quantity = document.getElementById("quantity");
+
+  const summaryProduct =
+    document.getElementById("summaryProduct");
+
+  const summaryQuantity =
+    document.getElementById("summaryQuantity");
+
+  product.addEventListener("change", function () {
+    summaryProduct.textContent =
+      product.options[product.selectedIndex].text;
+  });
+
+  quantity.addEventListener("input", function () {
+    summaryQuantity.textContent =
+      quantity.value || "1";
+  });
+
+  document
+    .getElementById("orderForm")
+    .addEventListener("submit", function (event) {
+
+      event.preventDefault();
+
+      alert(
+        "Форма заказа готова. Подключение к Supabase добавим следующим этапом."
+      );
+
+    });
+</script>
+
+</body>
+</html>
