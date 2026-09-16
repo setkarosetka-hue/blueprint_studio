@@ -1,10 +1,11 @@
+```html
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Личный кабинет — Blueprint Studio</title>
+
+  <title>Мой аккаунт — Blueprint Studio</title>
 
   <style>
     * {
@@ -15,176 +16,128 @@
 
     body {
       font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #111827;
+      background: #f4f6fb;
+      color: #171a21;
     }
 
     header {
-      background: white;
-      border-bottom: 1px solid #e5e7eb;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+      background: #111827;
+      color: white;
+      padding: 16px 24px;
 
-    .nav {
-      max-width: 1100px;
-      min-height: 70px;
-      margin: auto;
-      padding: 0 20px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      gap: 15px;
     }
 
     .logo {
-      color: #2563eb;
-      text-decoration: none;
       font-size: 21px;
-      font-weight: 800;
+      font-weight: bold;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: #374151;
+    .back {
+      color: white;
       text-decoration: none;
+      border: 1px solid #475569;
+      padding: 9px 13px;
+      border-radius: 8px;
       font-size: 14px;
     }
 
-    .logout {
-      border: none;
-      background: #fee2e2;
-      color: #b91c1c;
-      padding: 9px 13px;
-      border-radius: 9px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
     .container {
-      max-width: 1050px;
-      margin: auto;
-      padding: 45px 20px;
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 30px 20px 50px;
     }
 
-    .welcome {
-      margin-bottom: 30px;
-    }
-
-    .welcome h1 {
-      font-size: 34px;
+    h1 {
       margin-bottom: 8px;
     }
 
-    .welcome p {
-      color: #6b7280;
-    }
-
-    .profile {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 20px;
+    .subtitle {
+      color: #64748b;
       margin-bottom: 25px;
     }
 
     .card {
       background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 18px;
+      border: 1px solid #e2e8f0;
+      border-radius: 15px;
       padding: 23px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
     }
 
     .card h2 {
-      font-size: 19px;
       margin-bottom: 18px;
+      font-size: 20px;
     }
 
-    .profile-name {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .avatar {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      background: #dbeafe;
-      color: #2563eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      font-weight: 800;
-    }
-
-    .profile-name h3 {
-      margin-bottom: 4px;
-    }
-
-    .profile-name p {
-      color: #6b7280;
-      font-size: 13px;
-    }
-
-    .info {
-      border-top: 1px solid #e5e7eb;
-      padding-top: 15px;
-    }
-
-    .info-row {
+    .profile-row {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
-      padding: 7px 0;
+      gap: 20px;
+      padding: 13px 0;
+      border-bottom: 1px solid #edf1f5;
+    }
+
+    .profile-row:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      color: #64748b;
       font-size: 14px;
     }
 
-    .info-row span:first-child {
-      color: #6b7280;
+    .value {
+      font-weight: bold;
+      text-align: right;
+      word-break: break-word;
     }
 
-    .order-list {
+    .orders {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
     .order {
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 17px;
+      border: 1px solid #e2e8f0;
+      border-radius: 11px;
+      padding: 16px;
+    }
+
+    .order-top {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 15px;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
     }
 
     .order-number {
-      font-weight: 800;
-      margin-bottom: 5px;
-    }
-
-    .order-date {
-      color: #6b7280;
-      font-size: 13px;
+      font-weight: bold;
     }
 
     .status {
-      display: inline-block;
-      padding: 7px 11px;
-      border-radius: 20px;
+      padding: 6px 9px;
+      border-radius: 7px;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: bold;
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .status.accepted {
       background: #dbeafe;
       color: #1d4ed8;
-      white-space: nowrap;
+    }
+
+    .status.processing {
+      background: #fef3c7;
+      color: #92400e;
     }
 
     .status.ready {
@@ -192,192 +145,189 @@
       color: #166534;
     }
 
+    .status.completed {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
     .status.cancelled {
       background: #fee2e2;
-      color: #b91c1c;
+      color: #991b1b;
+    }
+
+    .order-info {
+      color: #64748b;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
     .empty {
       text-align: center;
       padding: 35px 15px;
-      color: #6b7280;
+      color: #64748b;
     }
 
-    .empty-icon {
-      font-size: 40px;
-      margin-bottom: 10px;
+    .loading {
+      text-align: center;
+      padding: 30px;
+      color: #64748b;
     }
 
-    .btn {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      padding: 11px 16px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 700;
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 13px;
+      border-radius: 9px;
+      margin-bottom: 18px;
+      display: none;
+    }
+
+    .logout {
+      width: 100%;
+      padding: 13px;
       border: none;
+      border-radius: 9px;
+      background: #dc2626;
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
       cursor: pointer;
     }
 
-    .btn-primary {
-      background: #2563eb;
-      color: white;
+    .logout:hover {
+      background: #b91c1c;
     }
 
-    footer {
-      margin-top: 50px;
-      padding: 30px 20px;
+    .new-order {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 11px 15px;
+      border-radius: 9px;
       background: #111827;
-      color: #9ca3af;
-      text-align: center;
-      font-size: 13px;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
     }
 
-    @media (max-width: 750px) {
-      .profile {
-        grid-template-columns: 1fr;
+    @media (max-width: 600px) {
+
+      header {
+        padding: 14px;
       }
 
-      .nav-links a {
-        display: none;
+      .container {
+        padding: 22px 12px 40px;
       }
 
-      .order {
-        align-items: flex-start;
+      .card {
+        padding: 17px;
+      }
+
+      .profile-row {
         flex-direction: column;
+        gap: 5px;
+      }
+
+      .value {
+        text-align: left;
+      }
+
+      .order-top {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
-
 </head>
 
 <body>
 
 <header>
-  <nav class="nav">
 
-```
-<a class="logo" href="index.html">
-  Blueprint Studio
-</a>
+  <div class="logo">
+    Blueprint Studio
+  </div>
 
-<div class="nav-links">
-  <a href="catalog.html">Каталог</a>
-  <a href="order.html">Новый заказ</a>
-</div>
+  <a href="index.html" class="back">
+    ← На сайт
+  </a>
 
-<button class="logout" id="logout">
-  Выйти
-</button>
-```
-
-  </nav>
 </header>
 
 <main class="container">
 
-  <div class="welcome">
-    <h1>Личный кабинет</h1>
-    <p>Управляй своим профилем и отслеживай заказы.</p>
-  </div>
+  <h1>Мой аккаунт</h1>
 
-  <div class="profile">
+  <p class="subtitle">
+    Управление профилем и просмотр заказов.
+  </p>
 
-```
-<div class="card">
+  <div id="error" class="error"></div>
 
-  <h2>👤 Профиль</h2>
+  <!-- Профиль -->
 
-  <div class="profile-name">
+  <section class="card">
 
-    <div class="avatar" id="avatar">
-      U
+    <h2>Профиль</h2>
+
+    <div class="profile-row">
+      <div class="label">Отображаемое имя</div>
+      <div class="value" id="displayName">Загрузка...</div>
     </div>
 
-    <div>
-      <h3 id="displayName">
-        Пользователь
-      </h3>
-
-      <p id="username">
-        @username
-      </p>
+    <div class="profile-row">
+      <div class="label">Имя пользователя</div>
+      <div class="value" id="username">Загрузка...</div>
     </div>
 
-  </div>
-
-  <div class="info">
-
-    <div class="info-row">
-      <span>Email</span>
-      <strong id="email">
-        —
-      </strong>
+    <div class="profile-row">
+      <div class="label">Email</div>
+      <div class="value" id="email">Загрузка...</div>
     </div>
 
-    <div class="info-row">
-      <span>Аккаунт создан</span>
-      <strong id="created">
-        —
-      </strong>
+    <div class="profile-row">
+      <div class="label">Дата регистрации</div>
+      <div class="value" id="createdAt">Загрузка...</div>
     </div>
 
-  </div>
+  </section>
 
-</div>
+  <!-- Заказы -->
 
-<div class="card">
+  <section class="card">
 
-  <h2>📦 Мои заказы</h2>
+    <h2>Мои заказы</h2>
 
-  <div id="orders" class="order-list">
+    <div id="orders" class="orders">
 
-    <div class="empty">
-
-      <div class="empty-icon">
-        📦
+      <div class="loading">
+        Загружаем заказы...
       </div>
 
-      <p>
-        Пока заказов нет.
-      </p>
-
-      <br>
-
-      <a
-        class="btn btn-primary"
-        href="order.html"
-      >
-        Создать заказ
-      </a>
-
     </div>
 
-  </div>
+    <a href="order.html" class="new-order">
+      + Новый заказ
+    </a>
 
-</div>
-```
+  </section>
 
-  </div>
+  <!-- Выход -->
+
+  <section class="card">
+
+    <h2>Аккаунт</h2>
+
+    <button class="logout" id="logoutButton">
+      Выйти из аккаунта
+    </button>
+
+  </section>
 
 </main>
 
-<footer>
-  © 2026 Blueprint Studio
-</footer>
+<!-- Supabase -->
 
-<script>
-  document
-    .getElementById("logout")
-    .addEventListener("click", function() {
-
-      alert(
-        "Выход будет подключён вместе с авторизацией Supabase."
-      );
-
-    });
-</script>
-
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+```
