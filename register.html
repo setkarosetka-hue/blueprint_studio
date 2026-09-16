@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация — Blueprint Studio</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 1100px;
+      min-height: 70px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .register-card {
+      width: 100%;
+      max-width: 450px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 22px;
+      padding: 35px;
+      box-shadow: 0 15px 40px rgba(0,0,0,.06);
+    }
+
+    .register-card h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+    }
+
+    .agreement {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      color: #6b7280;
+      font-size: 13px;
+      line-height: 1.4;
+      margin: 18px 0;
+    }
+
+    .agreement input {
+      width: auto;
+      margin-top: 3px;
+    }
+
+    .submit {
+      width: 100%;
+      border: none;
+      border-radius: 11px;
+      background: #2563eb;
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .submit:hover {
+      background: #1d4ed8;
+    }
+
+    .links {
+      text-align: center;
+      margin-top: 22px;
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 2;
+    }
+
+    .links a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .message {
+      display: none;
+      margin-bottom: 18px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #eff6ff;
+      color: #1e40af;
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 25px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 13px;
+    }
+
+    @media (max-width: 500px) {
+      .register-card {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="index.html">
+      Blueprint Studio
+    </a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="register-card">
+
+```
+<h1>Регистрация</h1>
+
+<p class="subtitle">
+  Создай аккаунт Blueprint Studio,
+  чтобы оформлять и отслеживать заказы.
+</p>
+
+<div id="message" class="message"></div>
+
+<form id="registerForm">
+
+  <div class="form-group">
+    <label for="username">Имя пользователя</label>
+
+    <input
+      id="username"
+      type="text"
+      placeholder="Например: Samuil"
+      minlength="3"
+      maxlength="30"
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="displayName">Отображаемое имя</label>
+
+    <input
+      id="displayName"
+      type="text"
+      placeholder="Как вас будут видеть"
+      maxlength="50"
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+
+    <input
+      id="email"
+      type="email"
+      placeholder="you@example.com"
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="password">Пароль</label>
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Минимум 6 символов"
+      minlength="6"
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="passwordConfirm">
+      Повторите пароль
+    </label>
+
+    <input
+      id="passwordConfirm"
+      type="password"
+      placeholder="Повторите пароль"
+      minlength="6"
+      required
+    >
+  </div>
+
+  <label class="agreement">
+    <input
+      id="agreement"
+      type="checkbox"
+      required
+    >
+
+    <span>
+      Я согласен с правилами использования
+      Blueprint Studio.
+    </span>
+  </label>
+
+  <button class="submit" type="submit">
+    Создать аккаунт
+  </button>
+
+</form>
+
+<div class="links">
+  Уже есть аккаунт?
+  <a href="login.html">Войти</a>
+  <br>
+  <a href="index.html">← Вернуться на главную</a>
+</div>
+```
+
+  </div>
+
+</main>
+
+<footer>
+  © 2026 Blueprint Studio
+</footer>
+
+<script>
+  document
+    .getElementById("registerForm")
+    .addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      const password =
+        document.getElementById("password").value;
+
+      const confirmPassword =
+        document.getElementById("passwordConfirm").value;
+
+      const message =
+        document.getElementById("message");
+
+      if (password !== confirmPassword) {
+
+        message.textContent =
+          "Пароли не совпадают.";
+
+        message.style.display = "block";
+
+        return;
+      }
+
+      message.textContent =
+        "Форма готова. Подключение регистрации к Supabase добавим следующим этапом.";
+
+      message.style.display = "block";
+    });
+</script>
+
+</body>
+</html>
