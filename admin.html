@@ -1,0 +1,640 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админ-панель — Blueprint Studio</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6fb;
+      color: #171a21;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .admin-label {
+      font-size: 13px;
+      color: #cbd5e1;
+      margin-top: 3px;
+    }
+
+    .back-btn {
+      text-decoration: none;
+      color: white;
+      border: 1px solid #475569;
+      padding: 9px 14px;
+      border-radius: 9px;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 28px 20px 50px;
+    }
+
+    .page-title {
+      margin-bottom: 24px;
+    }
+
+    .page-title h1 {
+      font-size: 30px;
+      margin-bottom: 7px;
+    }
+
+    .page-title p {
+      color: #64748b;
+    }
+
+    /* Статистика */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+    }
+
+    .stat-title {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .stat-number {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    /* Навигация */
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      border: none;
+      background: white;
+      border: 1px solid #dbe2ea;
+      padding: 11px 17px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .tab.active {
+      background: #111827;
+      color: white;
+      border-color: #111827;
+    }
+
+    /* Панели */
+
+    .panel {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 15px;
+      padding: 22px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .panel-header h2 {
+      font-size: 20px;
+    }
+
+    .search {
+      padding: 10px 13px;
+      border: 1px solid #d1d9e2;
+      border-radius: 8px;
+      outline: none;
+      min-width: 230px;
+    }
+
+    /* Заказы */
+
+    .orders {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .order {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 17px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr auto;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .order-number {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .order-small {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: bold;
+      background: #eef2ff;
+      color: #3730a3;
+    }
+
+    .status.created {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .status.accepted {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .status.processing {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .status.ready {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status.completed {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .status.cancelled {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .order-btn {
+      border: none;
+      background: #111827;
+      color: white;
+      padding: 9px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Товары */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .product {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .product h3 {
+      margin-bottom: 8px;
+    }
+
+    .product p {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .product-price {
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .edit-btn {
+      width: 100%;
+      padding: 9px;
+      border: 1px solid #cbd5e1;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Промокоды */
+
+    .promo-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .promo-table th,
+    .promo-table td {
+      padding: 13px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .promo-table th {
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    .promo-active {
+      color: #15803d;
+      font-weight: bold;
+    }
+
+    /* Скрытие */
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 45px 20px;
+      color: #64748b;
+    }
+
+    /* Мобильная версия */
+
+    @media (max-width: 900px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .order {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .products {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 14px;
+      }
+
+      .container {
+        padding: 20px 12px 40px;
+      }
+
+      .page-title h1 {
+        font-size: 25px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .stat {
+        padding: 15px;
+      }
+
+      .stat-number {
+        font-size: 24px;
+      }
+
+      .order {
+        grid-template-columns: 1fr;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .search {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .promo-table {
+        font-size: 13px;
+      }
+
+      .promo-table th,
+      .promo-table td {
+        padding: 9px 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <div class="logo">Blueprint Studio</div>
+    <div class="admin-label">Панель администратора</div>
+  </div>
+
+  <a href="index.html" class="back-btn">← На сайт</a>
+</header>
+
+<main class="container">
+
+  <div class="page-title">
+    <h1>Админ-панель</h1>
+    <p>Управление заказами, товарами и промокодами.</p>
+  </div>
+
+  <!-- Статистика -->
+
+  <div class="stats">
+
+    <div class="stat">
+      <div class="stat-title">Всего заказов</div>
+      <div class="stat-number" id="totalOrders">0</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Новые</div>
+      <div class="stat-number" id="newOrders">0</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">В работе</div>
+      <div class="stat-number" id="processingOrders">0</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Готовые</div>
+      <div class="stat-number" id="readyOrders">0</div>
+    </div>
+
+  </div>
+
+  <!-- Вкладки -->
+
+  <div class="tabs">
+
+    <button class="tab active" onclick="openTab('orders', this)">
+      📦 Заказы
+    </button>
+
+    <button class="tab" onclick="openTab('products', this)">
+      🛍 Товары
+    </button>
+
+    <button class="tab" onclick="openTab('promos', this)">
+      🎟 Промокоды
+    </button>
+
+  </div>
+
+  <!-- ЗАКАЗЫ -->
+
+  <section id="orders" class="section active">
+
+    <div class="panel">
+
+      <div class="panel-header">
+        <h2>Заказы</h2>
+
+        <input
+          type="text"
+          class="search"
+          placeholder="Поиск заказа..."
+          id="orderSearch"
+          oninput="searchOrders()"
+        >
+      </div>
+
+      <div class="orders" id="ordersList">
+
+        <div class="empty">
+          <div style="font-size:40px;margin-bottom:10px;">📦</div>
+          <div>Пока нет заказов.</div>
+          <div style="font-size:13px;margin-top:6px;">
+            После подключения Supabase здесь появятся реальные заказы.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ТОВАРЫ -->
+
+  <section id="products" class="section">
+
+    <div class="panel">
+
+      <div class="panel-header">
+        <h2>Товары</h2>
+
+        <button class="order-btn" onclick="addProduct()">
+          + Добавить товар
+        </button>
+      </div>
+
+      <div class="products">
+
+        <div class="product">
+          <h3>3D-печать</h3>
+          <p>Печать моделей на 3D-принтере.</p>
+          <div class="product-price">от 5 €</div>
+          <button class="edit-btn" onclick="editProduct('3D-печать')">
+            Редактировать
+          </button>
+        </div>
+
+        <div class="product">
+          <h3>Брелоки</h3>
+          <p>Индивидуальные брелоки.</p>
+          <div class="product-price">от 2 €</div>
+          <button class="edit-btn" onclick="editProduct('Брелоки')">
+            Редактировать
+          </button>
+        </div>
+
+        <div class="product">
+          <h3>Браслеты</h3>
+          <p>Браслеты с индивидуальным дизайном.</p>
+          <div class="product-price">от 3 €</div>
+          <button class="edit-btn" onclick="editProduct('Браслеты')">
+            Редактировать
+          </button>
+        </div>
+
+        <div class="product">
+          <h3>Пазлы</h3>
+          <p>3D-печатные пазлы и игровые модели.</p>
+          <div class="product-price">от 4 €</div>
+          <button class="edit-btn" onclick="editProduct('Пазлы')">
+            Редактировать
+          </button>
+        </div>
+
+        <div class="product">
+          <h3>Индивидуальный заказ</h3>
+          <p>Изготовление по вашему проекту.</p>
+          <div class="product-price">По расчёту</div>
+          <button class="edit-btn" onclick="editProduct('Индивидуальный заказ')">
+            Редактировать
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ПРОМОКОДЫ -->
+
+  <section id="promos" class="section">
+
+    <div class="panel">
+
+      <div class="panel-header">
+        <h2>Промокоды</h2>
+
+        <button class="order-btn" onclick="addPromo()">
+          + Создать промокод
+        </button>
+      </div>
+
+      <table class="promo-table">
+
+        <thead>
+          <tr>
+            <th>Код</th>
+            <th>Скидка</th>
+            <th>Использований</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td colspan="4">
+              <div class="empty">
+                Промокодов пока нет.
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+
+  function openTab(tabName, button) {
+
+    document.querySelectorAll(".section").forEach(section => {
+      section.classList.remove("active");
+    });
+
+    document.querySelectorAll(".tab").forEach(tab => {
+      tab.classList.remove("active");
+    });
+
+    document.getElementById(tabName).classList.add("active");
+    button.classList.add("active");
+  }
+
+  function searchOrders() {
+
+    const value = document
+      .getElementById("orderSearch")
+      .value
+      .toLowerCase();
+
+    const orders = document.querySelectorAll(".order");
+
+    orders.forEach(order => {
+
+      const text = order.innerText.toLowerCase();
+
+      order.style.display =
+        text.includes(value) ? "grid" : "none";
+
+    });
+
+  }
+
+  function addProduct() {
+    alert("Добавление товара подключим вместе с Supabase.");
+  }
+
+  function editProduct(name) {
+    alert("Редактирование товара «" + name + "» подключим вместе с Supabase.");
+  }
+
+  function addPromo() {
+    alert("Создание промокодов подключим вместе с Supabase.");
+  }
+
+</script>
+
+</body>
+</html>
+```
