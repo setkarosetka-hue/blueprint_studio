@@ -1,5 +1,5 @@
+```html
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -186,6 +186,11 @@
       background: #1d4ed8;
     }
 
+    .submit:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
     .notice {
       background: #eff6ff;
       border: 1px solid #bfdbfe;
@@ -193,6 +198,26 @@
       border-radius: 12px;
       padding: 14px;
       font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .success {
+      display: none;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .error {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      border-radius: 14px;
+      padding: 15px;
       margin-bottom: 20px;
     }
 
@@ -217,7 +242,6 @@
       }
     }
   </style>
-
 </head>
 
 <body>
@@ -236,146 +260,147 @@
     <p>Заполни информацию о своём заказе.</p>
   </div>
 
-  <div class="notice">
-    🔐 Для оформления заказа потребуется войти в аккаунт.
+  <div class="notice" id="loginNotice">
+    🔐 Для оформления заказа необходимо войти в аккаунт.
   </div>
+
+  <div class="success" id="successMessage"></div>
+  <div class="error" id="errorMessage"></div>
 
   <form id="orderForm">
 
-```
-<div class="card">
-  <h2>📦 Информация о заказе</h2>
+    <div class="card">
+      <h2>📦 Информация о заказе</h2>
 
-  <div class="form-group">
-    <label for="product">Что вы хотите заказать?</label>
+      <div class="form-group">
+        <label for="product">Что вы хотите заказать?</label>
 
-    <select id="product" required>
-      <option value="">Выберите товар</option>
-      <option value="3d-print">3D-печать</option>
-      <option value="keychain">Брелок</option>
-      <option value="bracelet">Браслет</option>
-      <option value="other">Другое</option>
-    </select>
-  </div>
+        <select id="product" required>
+          <option value="">Выберите товар</option>
+          <option value="3d-print">3D-печать</option>
+          <option value="keychain">Брелок</option>
+          <option value="bracelet">Браслет</option>
+          <option value="other">Другое</option>
+        </select>
+      </div>
 
-  <div class="form-group">
-    <label for="quantity">Количество</label>
+      <div class="form-group">
+        <label for="quantity">Количество</label>
 
-    <input
-      id="quantity"
-      type="number"
-      min="1"
-      value="1"
-      required
-    >
-  </div>
+        <input
+          id="quantity"
+          type="number"
+          min="1"
+          value="1"
+          required
+        >
+      </div>
 
-  <div class="form-group">
-    <label for="format">Формат / размер</label>
+      <div class="form-group">
+        <label for="format">Формат / размер</label>
 
-    <input
-      id="format"
-      type="text"
-      placeholder="Например: 50 мм, STL, стандартный"
-    >
-  </div>
+        <input
+          id="format"
+          type="text"
+          placeholder="Например: 50 мм, STL, стандартный"
+        >
+      </div>
 
-  <div class="form-group">
-    <label for="comment">Комментарий</label>
+      <div class="form-group">
+        <label for="comment">Комментарий</label>
 
-    <textarea
-      id="comment"
-      placeholder="Опишите дополнительные пожелания..."
-    ></textarea>
-  </div>
-</div>
-
-<div class="card">
-  <h2>🚚 Получение заказа</h2>
-
-  <div class="method">
-
-    <label>
-      <input
-        type="radio"
-        name="pickup"
-        value="office"
-        checked
-      >
-      Забрать самостоятельно
-    </label>
-
-    <label>
-      <input
-        type="radio"
-        name="pickup"
-        value="delivery"
-      >
-      Доставка
-    </label>
-
-  </div>
-</div>
-
-<div class="card">
-  <h2>📁 Файлы</h2>
-
-  <div class="file-box">
-    <div>Загрузите файл для заказа</div>
-
-    <input
-      id="files"
-      type="file"
-      multiple
-    >
-  </div>
-</div>
-
-<div class="card">
-  <h2>🎟️ Промокод</h2>
-
-  <div class="form-group">
-    <label for="promo">Промокод</label>
-
-    <input
-      id="promo"
-      type="text"
-      placeholder="Введите промокод"
-    >
-  </div>
-</div>
-
-<div class="card">
-
-  <h2>🧾 Итог</h2>
-
-  <div class="summary">
-
-    <div class="summary-row">
-      <span>Товар</span>
-      <strong id="summaryProduct">—</strong>
+        <textarea
+          id="comment"
+          placeholder="Опишите дополнительные пожелания..."
+        ></textarea>
+      </div>
     </div>
 
-    <div class="summary-row">
-      <span>Количество</span>
-      <strong id="summaryQuantity">1</strong>
+    <div class="card">
+      <h2>🚚 Получение заказа</h2>
+
+      <div class="method">
+
+        <label>
+          <input
+            type="radio"
+            name="pickup"
+            value="office"
+            checked
+          >
+          Забрать самостоятельно
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="pickup"
+            value="delivery"
+          >
+          Доставка
+        </label>
+
+      </div>
     </div>
 
-    <div class="summary-row total">
-      <span>Стоимость</span>
-      <strong id="summaryPrice">По расчёту</strong>
+    <div class="card">
+      <h2>📁 Файлы</h2>
+
+      <div class="file-box">
+        <div>Загрузите файл для заказа</div>
+
+        <input
+          id="files"
+          type="file"
+          multiple
+        >
+      </div>
     </div>
 
-  </div>
+    <div class="card">
+      <h2>🎟️ Промокод</h2>
 
-  <br>
+      <div class="form-group">
+        <label for="promo">Промокод</label>
 
-  <button class="submit" type="submit">
-    Создать заказ
-  </button>
+        <input
+          id="promo"
+          type="text"
+          placeholder="Введите промокод"
+        >
+      </div>
+    </div>
 
-</div>
-```
+    <div class="card">
+
+      <h2>🧾 Итог</h2>
+
+      <div class="summary">
+
+        <div class="summary-row">
+          <span>Товар</span>
+          <strong id="summaryProduct">—</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Количество</span>
+          <strong id="summaryQuantity">1</strong>
+        </div>
+
+        <div class="summary-row total">
+          <span>Стоимость</span>
+          <strong id="summaryPrice">По расчёту</strong>
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="submit" id="submitButton" type="submit">
+        Создать заказ
+      </button>
+
+    </div>
 
   </form>
 
@@ -385,7 +410,21 @@
   © 2026 Blueprint Studio
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+  const SUPABASE_URL =
+    "https://atfhyyarjqiwlaxixbrd.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_2rtmu-1UkcDR4D35qkGwgw_AQDBR8Lw";
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
   const product = document.getElementById("product");
   const quantity = document.getElementById("quantity");
 
@@ -395,28 +434,185 @@
   const summaryQuantity =
     document.getElementById("summaryQuantity");
 
+  const form =
+    document.getElementById("orderForm");
+
+  const submitButton =
+    document.getElementById("submitButton");
+
+  const loginNotice =
+    document.getElementById("loginNotice");
+
+  const successMessage =
+    document.getElementById("successMessage");
+
+  const errorMessage =
+    document.getElementById("errorMessage");
+
+
   product.addEventListener("change", function () {
+
     summaryProduct.textContent =
       product.options[product.selectedIndex].text;
+
   });
+
 
   quantity.addEventListener("input", function () {
+
     summaryQuantity.textContent =
       quantity.value || "1";
+
   });
 
-  document
-    .getElementById("orderForm")
-    .addEventListener("submit", function (event) {
 
-      event.preventDefault();
+  async function checkUser() {
 
-      alert(
-        "Форма заказа готова. Подключение к Supabase добавим следующим этапом."
-      );
+    const {
+      data: { user }
+    } = await supabaseClient.auth.getUser();
 
-    });
+    if (user) {
+      loginNotice.style.display = "none";
+    } else {
+      loginNotice.style.display = "block";
+    }
+
+    return user;
+  }
+
+
+  checkUser();
+
+
+  form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    successMessage.style.display = "none";
+    errorMessage.style.display = "none";
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Создание заказа...";
+
+
+    try {
+
+      const {
+        data: { user },
+        error: userError
+      } = await supabaseClient.auth.getUser();
+
+
+      if (userError) {
+        throw userError;
+      }
+
+
+      if (!user) {
+
+        throw new Error(
+          "Сначала войдите в свой аккаунт."
+        );
+
+      }
+
+
+      const selectedPickup =
+        document.querySelector(
+          'input[name="pickup"]:checked'
+        ).value;
+
+
+      const orderData = {
+
+        user_id: user.id,
+
+        product: product.value,
+
+        quantity:
+          Number(quantity.value),
+
+        format:
+          document.getElementById("format").value.trim(),
+
+        comment:
+          document.getElementById("comment").value.trim(),
+
+        pickup:
+          selectedPickup,
+
+        promo:
+          document.getElementById("promo").value.trim(),
+
+        status:
+          "Новый"
+
+      };
+
+
+      const {
+        data,
+        error
+      } = await supabaseClient
+        .from("orders")
+        .insert(orderData)
+        .select()
+        .single();
+
+
+      if (error) {
+        throw error;
+      }
+
+
+      successMessage.innerHTML =
+        "✅ <strong>Заказ успешно создан!</strong><br><br>" +
+        "Номер заказа: <strong>#" +
+        data.id +
+        "</strong><br>" +
+        "Статус: <strong>Новый</strong>";
+
+
+      successMessage.style.display = "block";
+
+      form.reset();
+
+      quantity.value = 1;
+
+      summaryProduct.textContent = "—";
+
+      summaryQuantity.textContent = "1";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    } catch (error) {
+
+      console.error(error);
+
+      errorMessage.textContent =
+        "❌ Ошибка: " +
+        (error.message ||
+        "Не удалось создать заказ.");
+
+      errorMessage.style.display = "block";
+
+    } finally {
+
+      submitButton.disabled = false;
+
+      submitButton.textContent =
+        "Создать заказ";
+
+    }
+
+  });
+
 </script>
 
 </body>
 </html>
+```
