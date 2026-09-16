@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог — Blueprint Studio</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      max-width: 1100px;
+      min-height: 70px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #374151;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 11px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .heading h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .heading p {
+      color: #6b7280;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .product {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.08);
+    }
+
+    .product-image {
+      height: 190px;
+      background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 65px;
+    }
+
+    .product-content {
+      padding: 22px;
+    }
+
+    .product h2 {
+      font-size: 21px;
+      margin-bottom: 9px;
+    }
+
+    .product p {
+      color: #6b7280;
+      line-height: 1.5;
+      font-size: 14px;
+      min-height: 65px;
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .empty {
+      display: none;
+      text-align: center;
+      background: white;
+      border: 1px solid #e5e7eb;
+      padding: 40px;
+      border-radius: 20px;
+      color: #6b7280;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 30px 20px;
+      background: #111827;
+      color: #9ca3af;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .heading h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+<header>
+  <nav class="nav">
+
+```
+<a class="logo" href="index.html">
+  Blueprint Studio
+</a>
+
+<div class="nav-links">
+  <a href="index.html">Главная</a>
+  <a href="order.html">Заказать</a>
+  <a href="account.html">Мои заказы</a>
+</div>
+
+<a class="btn btn-primary" href="order.html">
+  Заказать
+</a>
+```
+
+  </nav>
+</header>
+
+<main class="container">
+
+  <div class="heading">
+    <h1>Каталог</h1>
+    <p>Выберите то, что хотите заказать в Blueprint Studio.</p>
+  </div>
+
+  <div class="products">
+
+```
+<article class="product">
+
+  <div class="product-image">
+    🖨️
+  </div>
+
+  <div class="product-content">
+
+    <h2>3D-печать</h2>
+
+    <p>
+      Изготовление различных моделей
+      на 3D-принтере.
+    </p>
+
+    <div class="bottom">
+      <span class="price">от 5 €</span>
+
+      <a
+        class="btn btn-primary"
+        href="order.html?product=3d-print"
+      >
+        Заказать
+      </a>
+    </div>
+
+  </div>
+
+</article>
+
+<article class="product">
+
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-content">
+
+    <h2>Брелоки</h2>
+
+    <p>
+      Персональные брелоки различных
+      форм и дизайнов.
+    </p>
+
+    <div class="bottom">
+      <span class="price">от 2 €</span>
+
+      <a
+        class="btn btn-primary"
+        href="order.html?product=keychain"
+      >
+        Заказать
+      </a>
+    </div>
+
+  </div>
+
+</article>
+
+<article class="product">
+
+  <div class="product-image">
+    📿
+  </div>
+
+  <div class="product-content">
+
+    <h2>Браслеты</h2>
+
+    <p>
+      Браслеты с различными цветами
+      и вариантами оформления.
+    </p>
+
+    <div class="bottom">
+      <span class="price">от 3 €</span>
+
+      <a
+        class="btn btn-primary"
+        href="order.html?product=bracelet"
+      >
+        Заказать
+      </a>
+    </div>
+
+  </div>
+
+</article>
+
+<article class="product">
+
+  <div class="product-image">
+    🧩
+  </div>
+
+  <div class="product-content">
+
+    <h2>Пазлы</h2>
+
+    <p>
+      Различные головоломки и
+      игровые модели.
+    </p>
+
+    <div class="bottom">
+      <span class="price">от 4 €</span>
+
+      <a
+        class="btn btn-primary"
+        href="order.html?product=puzzle"
+      >
+        Заказать
+      </a>
+    </div>
+
+  </div>
+
+</article>
+
+<article class="product">
+
+  <div class="product-image">
+    🎨
+  </div>
+
+  <div class="product-content">
+
+    <h2>Индивидуальный заказ</h2>
+
+    <p>
+      Есть собственная идея?
+      Создадим проект по вашим требованиям.
+    </p>
+
+    <div class="bottom">
+      <span class="price">По расчёту</span>
+
+      <a
+        class="btn btn-primary"
+        href="order.html?product=other"
+      >
+        Обсудить
+      </a>
+    </div>
+
+  </div>
+
+</article>
+```
+
+  </div>
+
+</main>
+
+<footer>
+  © 2026 Blueprint Studio
+</footer>
+
+</body>
+</html>
