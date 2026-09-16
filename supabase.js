@@ -1,14 +1,13 @@
 ```javascript
 // ==========================================
-// Blueprint Studio — Supabase connection
+// Blueprint Studio — Supabase
 // ==========================================
 
-// ВСТАВЬ СЮДА данные своего проекта Supabase
+const SUPABASE_URL = "https://atfhyyarjqiwlaxixbrd.supabase.co";
 
-const SUPABASE_URL = "ВСТАВЬ_СЮДА_PROJECT_URL";
-const SUPABASE_ANON_KEY = "ВСТАВЬ_СЮДА_PUBLISHABLE_ИЛИ_ANON_KEY";
+const SUPABASE_ANON_KEY =
+  "sb_publishable_2rtmu-1UkcDR4D35qkGwgw_AQDBR8Lw";
 
-// Создание клиента Supabase
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
