@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blueprint Studio</title>
+  <meta name="description" content="Blueprint Studio — создание, печать и оформление заказов.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      min-height: 70px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-links a {
+      color: #374151;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-light {
+      background: #eef2ff;
+      color: #2563eb;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+      padding: 90px 20px 70px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 70px);
+      line-height: 1;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #2563eb;
+    }
+
+    .hero p {
+      color: #6b7280;
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, #2563eb, #4f46e5);
+      color: white;
+      min-height: 330px;
+      border-radius: 28px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      box-shadow: 0 25px 60px rgba(37, 99, 235, 0.25);
+    }
+
+    .hero-card .icon {
+      font-size: 70px;
+      margin-bottom: auto;
+    }
+
+    .hero-card h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .hero-card p {
+      color: rgba(255,255,255,.8);
+      font-size: 15px;
+      margin: 0;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #6b7280;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .feature-icon {
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: #6b7280;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .cta {
+      background: #111827;
+      color: white;
+      border-radius: 25px;
+      padding: 45px 30px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .cta h2 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      color: #9ca3af;
+      margin-bottom: 25px;
+    }
+
+    footer {
+      margin-top: 60px;
+      background: #111827;
+      color: #9ca3af;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 750px) {
+      .nav {
+        min-height: 60px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 55px;
+      }
+
+      .hero-card {
+        min-height: 260px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="index.html">Blueprint Studio</a>
+
+```
+<div class="nav-links">
+  <a href="catalog.html">Каталог</a>
+  <a href="account.html">Мои заказы</a>
+  <a href="login.html">Войти</a>
+</div>
+
+<a class="btn btn-primary" href="order.html">Заказать</a>
+```
+
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+
+```
+<div>
+  <h1>
+    Blueprint<br>
+    <span>Studio</span>
+  </h1>
+
+  <p>
+    Создавай, заказывай и отслеживай свои проекты
+    в одном месте.
+  </p>
+
+  <div class="hero-buttons">
+    <a class="btn btn-primary" href="order.html">
+      Сделать заказ
+    </a>
+
+    <a class="btn btn-light" href="catalog.html">
+      Открыть каталог
+    </a>
+  </div>
+</div>
+
+<div class="hero-card">
+  <div class="icon">🧩</div>
+
+  <h2>Твой проект.</h2>
+
+  <p>
+    От идеи до готового заказа — всё под контролем.
+  </p>
+</div>
+```
+
+  </section>
+
+  <section>
+
+```
+<div class="section-title">
+  <h2>Что умеет Blueprint Studio?</h2>
+  <p>Основные возможности платформы</p>
+</div>
+
+<div class="features">
+
+  <div class="feature">
+    <div class="feature-icon">🛒</div>
+    <h3>Заказы</h3>
+    <p>
+      Создавай заказ и указывай необходимые параметры,
+      комментарии и файлы.
+    </p>
+  </div>
+
+  <div class="feature">
+    <div class="feature-icon">📦</div>
+    <h3>Отслеживание</h3>
+    <p>
+      Следи за статусом заказа от создания
+      до его завершения.
+    </p>
+  </div>
+
+  <div class="feature">
+    <div class="feature-icon">🎟️</div>
+    <h3>Промокоды</h3>
+    <p>
+      Используй доступные промокоды при оформлении
+      заказа.
+    </p>
+  </div>
+
+</div>
+
+<div class="cta">
+  <h2>Готов начать?</h2>
+
+  <p>
+    Создай свой первый заказ прямо сейчас.
+  </p>
+
+  <a class="btn btn-primary" href="order.html">
+    Создать заказ
+  </a>
+</div>
+```
+
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Blueprint Studio. Все права защищены.
+</footer>
+
+</body>
+</html>
